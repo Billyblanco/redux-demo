@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import axios from 'axios'
-
-import { fetchedProducts, createdProduct, addItemToCart } from '../reducer'
 
 class Products extends Component {
   constructor() {
@@ -17,7 +14,7 @@ class Products extends Component {
 
   componentDidMount() {
     axios.get('/api/products').then(response => {
-      this.props.fetchedProducts(response.data)
+      // this.props.fetchedProducts(response.data)
     })
   }
 
@@ -46,15 +43,10 @@ class Products extends Component {
           <input onChange={this.handleInputChange} name='imageUrl' type="text" placeholder='image url'/>
           <button onClick={this.handleAddClick}>ADD</button>
         </div>
-        <div style={{display: 'flex', flexWrap: 'wrap'}}>
-          {this.props.products.map(product => {
+        <div style={styles.products}>
+          {this.props.products && this.props.products.map(product => {
             return (
-              <div style={{
-                border: '1px solid black',
-                margin: 10,
-                width: '300px',
-                padding: 20
-              }} key={`product${product.id}`}>
+              <div style={styles.product} key={`product${product.id}`}>
                 <img width='200' height='200' src={product.image_url} alt=""/>
                 <h1>{product.name}</h1>
                 <h3>{product.price}</h3>
@@ -69,20 +61,8 @@ class Products extends Component {
   }
 }
 
-let mapStateToProps = state => {
-  return {
-    products: state.products
-  }
-}
 
-let mapActionCreatorsToProps = {
-  fetchedProducts,
-  createdProduct,
-  addItemToCart
-}
-
-let connectProducts = connect(mapStateToProps, mapActionCreatorsToProps)
-export default connectProducts(Products);
+export default Products
 
 let styles = {
   form: {
@@ -90,5 +70,15 @@ let styles = {
     flexDirection: 'column',
     margin: 50,
     width: 400
+  },
+  products: {
+    display: 'flex', 
+    flexWrap: 'wrap'
+  }, 
+  product: {
+    border: '1px solid black',
+    margin: 10,
+    width: '300px',
+    padding: 20
   }
 }

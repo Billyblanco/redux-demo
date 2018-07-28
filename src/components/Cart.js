@@ -1,7 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { showCart } from '../reducer'
 
 function Cart(props) {
   return (
@@ -10,7 +7,7 @@ function Cart(props) {
         <div style={styles.modal}>
           <h1>My Cart</h1>
           <div style={styles.products}>
-            {props.cart.map(cart => {
+            {props.cart && props.cart.map(cart => {
               return (
                 <div style={styles.product} key={`cart${cart.id}`}>
                   <img width='200' height='200' src={cart.image_url} alt=""/>
@@ -28,18 +25,7 @@ function Cart(props) {
   )
 }
 
-let mapStateToProps = state => {
-  return {
-    cart: state.cart,
-    showingCart: state.showingCart
-  }
-}
-
-let mapActionCreatorsToProps = {
-  showCart
-}
-
-export default connect(mapStateToProps, mapActionCreatorsToProps)(Cart)
+export default Cart
 
 
 let styles = {

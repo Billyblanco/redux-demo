@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div className="App">
         <header style={styles.header}>
-         COOLEST STORE EVER!
+         <h2>COOLEST STORE EVER</h2>
          <CartIcon />
         </header>
         <Cart />

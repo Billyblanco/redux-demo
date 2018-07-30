@@ -6,7 +6,6 @@ const SHOW_CART = 'SHOW_CART'
 
 //REDUCER
 let initialState = {
-  user: null,
   products: [],
   cart: [],
   showingCart: false

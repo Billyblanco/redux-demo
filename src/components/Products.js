@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import { connect } from 'react-redux'
+import { fetchedProducts, createdProduct, addItemToCart } from '../reducer'
+
 class Products extends Component {
   constructor() {
     super()
@@ -14,7 +17,7 @@ class Products extends Component {
 
   componentDidMount() {
     axios.get('/api/products').then(response => {
-      // this.props.fetchedProducts(response.data)
+      this.props.fetchedProducts(response.data)
     })
   }
 
@@ -61,8 +64,20 @@ class Products extends Component {
   }
 }
 
+let mapStateToProps = state => {
+  return {
+    products: state.products
+  }
+}
 
-export default Products
+let mapActionCreatorsToProps = {
+  fetchedProducts,
+  createdProduct,
+  addItemToCart
+}
+
+let connectProducts = connect(mapStateToProps, mapActionCreatorsToProps)
+export default connectProducts(Products)
 
 let styles = {
   form: {

@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { showCart } from '../reducer'
 
 function Cart(props) {
   return (
@@ -25,7 +28,14 @@ function Cart(props) {
   )
 }
 
-export default Cart
+let mapStateToProps = state => {
+  return {
+    cart: state.cart, 
+    showingCart: state.showingCart
+  }
+}
+
+export default connect(mapStateToProps, {showCart})(Cart)
 
 
 let styles = {
